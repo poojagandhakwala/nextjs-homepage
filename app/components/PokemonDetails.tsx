@@ -12,7 +12,6 @@ import {
   Divider,
   ImageList,
   ImageListItem,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -23,6 +22,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "next/link";
 import { Ability, Moves, Types } from "../services/types";
+import Image from "next/image";
 
 const PokemonDetails = () => {
   const { id } = useParams();
@@ -79,8 +79,8 @@ const PokemonDetails = () => {
         </Typography>
       </Breadcrumbs>
       <div className="p-5">
-        <div className="flex flex-row gap-x-4">
-          <div className="w-1/3 p-2">
+        <div className="flex flex-row max-lg:flex-col gap-x-4">
+          <div className="w-1/3 p-2 max-lg:w-full">
             <ImageList
               sx={{
                 width: "100%",
@@ -95,19 +95,28 @@ const PokemonDetails = () => {
                 (item) =>
                   item && (
                     <ImageListItem key={item}>
-                      <img
+                      {/* <img
                         srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                         src={item}
                         alt={item}
                         loading="lazy"
                         className="bg-gray-100 rounded-md shadow-md"
+                      /> */}
+                      <Image
+                        src={item}
+                        alt={item}
+                        width={164}
+                        height={164}
+                        className="bg-gray-100 rounded-md shadow-md object-contain"
+                        style={{ width: "100%", height: "auto" }}
+                        loading="lazy"
                       />
                     </ImageListItem>
                   )
               )}
             </ImageList>
           </div>
-          <div className="w-2/3">
+          <div className="w-2/3  max-lg:w-full">
             <div className="flex flex-col flex-wrap gap-4 mb-6">
               <Typography variant="h4" className="capitalize font-bold">
                 {name}
@@ -140,11 +149,11 @@ const PokemonDetails = () => {
               </div>
             </div>
             {cries?.latest && (
-              <div className="mt-4">
+              <div className="my-4">
                 <Typography variant="subtitle1" className="mb-1 !text-gray-700">
                   Pokémon Cry
                 </Typography>
-                <audio controls className="max-w-72">
+                <audio controls className="max-w-72 max-lg:max-w-60">
                   <source src={cries.latest} type="audio/ogg" />
                   Your browser does not support the audio element.
                 </audio>

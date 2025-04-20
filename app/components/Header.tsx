@@ -5,7 +5,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  MenuList,
   Toolbar,
   Typography,
   useMediaQuery,
@@ -20,15 +19,13 @@ const Header = () => {
   const router = useRouter();
   const theme = useTheme();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
 
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>): void => {
     setMenuAnchor(event.currentTarget);
   };
   const handleClose = (): void => {
-    setAnchorEl(null);
     setMenuAnchor(null);
   };
 
@@ -75,7 +72,6 @@ const Header = () => {
                 mx: "auto",
                 px: 2,
               }}
-              
             >
               <Searchbar />
             </Box>
@@ -89,7 +85,12 @@ const Header = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            router.push("/");
+            handleClose();
+          }}
+        >
           Home
         </MenuItem>
       </Menu>

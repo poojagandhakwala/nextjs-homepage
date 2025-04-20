@@ -3,7 +3,7 @@ import { PokemonList } from "../services/types";
 import { Skeleton } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-import { usePokemonId } from "../utils/hooks";
+import { getPokemonId } from "../utils/helpers";
 
 interface LayoutProps {
   pokemons: PokemonList[];
@@ -18,28 +18,29 @@ const ViewLayout = ({ pokemons, view, isLoading }: LayoutProps) => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4">
           {isLoading &&
             [...Array(5)].map((_, id) => (
-              <div key={id} className="w-full h-[150px] sm:h-[160px] md:h-[180px]">
-              <Skeleton
+              <div
                 key={id}
-                variant="rectangular"
-                width="100%"
-                height="100%"
-                className="rounded-xl"
-                animation="wave"
-              />
+                className="w-full h-[150px] sm:h-[160px] md:h-[180px]"
+              >
+                <Skeleton
+                  key={id}
+                  variant="rectangular"
+                  width="100%"
+                  height="100%"
+                  className="rounded-xl"
+                  animation="wave"
+                />
               </div>
             ))}
-          {pokemons?.map((item: PokemonList, index: number) => {
-            const id = usePokemonId(item.url);
+          {pokemons?.map((item: PokemonList) => {
+            const id = getPokemonId(item.url);
             return (
               <Link
                 href={`/pokemon/${id}`}
+                key={id}
                 className="text-sm hover:text-blue-700"
               >
-                <div
-                  key={index}
-                  className="border rounded-2xl p-4 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all bg-gradient-to-br from-[#f0f4ff] to-white"
-                >
+                <div className="border rounded-2xl p-4 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all bg-gradient-to-br from-[#f0f4ff] to-white">
                   <div className="flex justify-center mb-2">
                     <Image
                       width={96}
@@ -69,12 +70,12 @@ const ViewLayout = ({ pokemons, view, isLoading }: LayoutProps) => {
                 animation="wave"
               />
             ))}
-          {pokemons?.map((item: PokemonList, index: number) => {
-            const id = usePokemonId(item.url);
+          {pokemons?.map((item: PokemonList) => {
+            const id = getPokemonId(item.url);
 
             return (
               <li
-                key={index}
+                key={id}
                 className="border px-4 py-3 rounded-xl flex items-center justify-between hover:shadow-md  hover:text-blue-700 transition-all bg-gradient-to-br from-[#f0f4ff] to-white"
               >
                 <Link

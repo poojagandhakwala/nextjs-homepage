@@ -1,6 +1,6 @@
 "use client";
 import { Autocomplete, TextField } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 import { PokemonList } from "../services/types";
 import { getPokemonId } from "../utils/helpers";
 import { useGetAllPokemonListQuery } from "../services/api";

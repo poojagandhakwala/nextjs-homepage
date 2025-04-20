@@ -1,3 +1,9 @@
+export interface AllPokemons {
+  count: number;
+  previous: string;
+  next: string;
+  results: PokemonList[];
+}
 export interface PokemonList {
   name: string;
   url: string;

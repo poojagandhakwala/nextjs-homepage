@@ -67,11 +67,11 @@ const HomePage = () => {
 
   return (
     <div>
-      <div className="flex flex-row max-md:flex-col p-4 gap-x-8">
-        <div className="w-1/4 my-3 max-md:w-full">
+      <div className="flex flex-row max-lg:flex-col p-4 gap-x-8">
+        <div className="w-1/4 my-3 max-lg:w-full">
           <Sidebar />
         </div>
-        <div className="w-3/4  max-md:w-full">
+        <div className="w-3/4  max-lg:w-full">
           <div className="flex justify-between my-3">
             <h3 className="text-xl">Pokemon List</h3>
             <div className="flex justify-end">
@@ -86,7 +86,7 @@ const HomePage = () => {
             </div>
           </div>
           <ViewLayout
-            pokemons={pokemons}
+            pokemons={pokemons ?? []}
             view={view}
             isLoading={isTypeLoading}
           />
