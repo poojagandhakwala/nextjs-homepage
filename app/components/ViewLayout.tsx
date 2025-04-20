@@ -13,7 +13,7 @@ interface LayoutProps {
 
 const ViewLayout = ({ pokemons, view, isLoading }: LayoutProps) => {
   return (
-    <div>
+    <div className="bg-white">
       {view === "module" ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4">
           {isLoading &&
@@ -50,7 +50,7 @@ const ViewLayout = ({ pokemons, view, isLoading }: LayoutProps) => {
                       className="object-contain"
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-center capitalize">
+                  <h3 className="text-lg font-semibold text-center capitalize text-gray-800">
                     {item.name}
                   </h3>
                 </div>
@@ -91,7 +91,7 @@ const ViewLayout = ({ pokemons, view, isLoading }: LayoutProps) => {
                       className="object-contain"
                       loading="lazy"
                     />
-                    <span className="text-lg font-medium capitalize text-decoration-none !underline-none">
+                    <span className="text-lg font-medium capitalize text-decoration-none !underline-none text-gray-800">
                       {item.name}
                     </span>
                   </div>
@@ -101,8 +101,8 @@ const ViewLayout = ({ pokemons, view, isLoading }: LayoutProps) => {
           })}
         </ul>
       )}
-      {pokemons?.length === 0 && (
-        <h5 className="text-xl justify-center flex">
+      {pokemons?.length === 0 && !isLoading && (
+        <h5 className="text-xl justify-center flex text-gray-800">
           No Pokemons found.Please select another type.
         </h5>
       )}

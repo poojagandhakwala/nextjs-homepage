@@ -41,6 +41,8 @@ const Sidebar = () => {
                   key={i}
                   height={40}
                   width={70}
+                  data-testid="skeleton-chip"
+
                 >
                   <Chip />
                 </Skeleton>
@@ -48,7 +50,7 @@ const Sidebar = () => {
             </div>
           )}
           <div className="flex flex-wrap gap-2">
-            <Chip
+            {!isLoading && <Chip
               label={"All"}
               onClick={() => dispatch(setSelectedType("All"))}
               className={`capitalize cursor-pointer ${
@@ -56,7 +58,7 @@ const Sidebar = () => {
               } hover:scale-105 transition-transform`}
               color="primary"
               variant="outlined"
-            />
+            />}
             {data?.results?.map((type: { name: string }, idx: number) => (
               <Chip
                 key={idx}
@@ -67,6 +69,7 @@ const Sidebar = () => {
                 } hover:scale-105 transition-transform`}
                 color="primary"
                 variant="outlined"
+                data-testid={`type-chip-${type.name}`}
               />
             ))}
           </div>

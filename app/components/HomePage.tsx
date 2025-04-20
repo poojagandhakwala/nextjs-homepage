@@ -66,14 +66,14 @@ const HomePage = () => {
       : typeData?.pokemon.map((p) => p.pokemon);
 
   return (
-    <div>
+    <div className="!bg-white h-screen">
       <div className="flex flex-row max-lg:flex-col p-4 gap-x-8">
         <div className="w-1/4 my-3 max-lg:w-full">
           <Sidebar />
         </div>
-        <div className="w-3/4  max-lg:w-full">
+        <div className="w-3/4 max-lg:w-full">
           <div className="flex justify-between my-3">
-            <h3 className="text-xl">Pokemon List</h3>
+            <h3 className="text-xl text-gray-800">Pokemon List</h3>
             <div className="flex justify-end">
               <ToggleButtonGroup value={view} exclusive onChange={handleView}>
                 <ToggleButton value="list" aria-label="list">

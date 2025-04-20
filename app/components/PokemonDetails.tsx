@@ -69,7 +69,7 @@ const PokemonDetails = () => {
   ].filter((image) => image);
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-white">
       <Breadcrumbs aria-label="breadcrumb" className="mb-4">
         <Link href="/" className="text-blue-600 hover:underline">
           Home
@@ -95,13 +95,6 @@ const PokemonDetails = () => {
                 (item) =>
                   item && (
                     <ImageListItem key={item}>
-                      {/* <img
-                        srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                        src={item}
-                        alt={item}
-                        loading="lazy"
-                        className="bg-gray-100 rounded-md shadow-md"
-                      /> */}
                       <Image
                         src={item}
                         alt={item}
@@ -118,7 +111,7 @@ const PokemonDetails = () => {
           </div>
           <div className="w-2/3  max-lg:w-full">
             <div className="flex flex-col flex-wrap gap-4 mb-6">
-              <Typography variant="h4" className="capitalize font-bold">
+              <Typography variant="h4" className="capitalize font-bold text-gray-800">
                 {name}
               </Typography>
               <div className="flex gap-2 flex-wrap">
@@ -134,10 +127,10 @@ const PokemonDetails = () => {
               </div>
             </div>
             <Divider className="my-6" />
-            <Typography variant="h6" className="mb-2">
+            <Typography variant="h6" className="mb-2 text-gray-800">
               Base Stats
             </Typography>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-800">
               <div>
                 <strong>Height:</strong> {height / 10} m
               </div>
@@ -159,7 +152,7 @@ const PokemonDetails = () => {
                 </audio>
               </div>
             )}
-            <Table className="bg-white rounded-md shadow-sm max-w-full sm:max-w-md">
+            <Table className="bg-white rounded-md shadow-sm max-w-full sm:max-w-md my-3">
               <TableHead>
                 <TableRow>
                   <TableCell className="!font-bold">Ability</TableCell>
