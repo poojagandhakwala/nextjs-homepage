@@ -1,33 +1,37 @@
 "use client";
 import { Autocomplete, TextField } from "@mui/material";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { PokemonList } from "../services/types";
-import { usePokemonId } from "../utils/hooks";
+import { getPokemonId } from "../utils/helpers";
 import { useGetAllPokemonListQuery } from "../services/api";
 import { useRouter } from "next/navigation";
 
 const Searchbar = () => {
   const {
     data: allPokemonList,
-    error: errors,
-    isLoading: isSearchLoading,
+    error,
+    isLoading,
   } = useGetAllPokemonListQuery({ skip: false });
+  const [searchValue, setSearchValue] = useState<string | null>("");
 
   const router = useRouter();
+  if (error) return <p>Error while loading pokemons.</p>;
+
+  const options =
+    allPokemonList?.results.map((option: PokemonList) => option.name) || [];
 
   return (
-    <div>
+    <div className="px-4 p-2">
       <Autocomplete
         id="search-pokemon"
         color="secondary"
-        fullWidth={true}
+        fullWidth       
         sx={{
           "& .MuiInputBase-root": {
-            // backgroundColor:"rgba(255, 255, 255, 0.79)",
-            // backgroundColor: "rgba(255, 255, 255, 0.1)",
             borderColor: "white",
             borderRadius: 2,
             px: 1,
+            backgroundColor: "rgba(255, 255, 255, 0.05)",
           },
           "& .MuiInputBase-input": {
             color: "white",
@@ -41,28 +45,28 @@ const Searchbar = () => {
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: "white",
           },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            // borderColor: "#90caf9", // light blue on focus
-          },
         }}
-        options={allPokemonList?.results.map(
-          (option: PokemonList) => option.name
-        )}
-        onChange={(event, value) => {
-          const selectedPokemon = allPokemonList?.results.find(
-            (pokemon: PokemonList) => pokemon.name === value
+        loading={isLoading}
+        options={options}
+        value={searchValue}
+        onChange={(event, newValue) => {
+          const selected = allPokemonList?.results?.find(
+            (pokemon: PokemonList) => pokemon.name === newValue
           );
-          if (selectedPokemon) {
-            const id = usePokemonId(selectedPokemon.url);
+          if (selected) {
+            const id = getPokemonId(selected.url);
             router.push(`/pokemon/${id}`);
+            setSearchValue("");
           }
         }}
+        autoComplete
+        blurOnSelect
+        onInputChange={(e, newInputValue) => setSearchValue(newInputValue)}
         renderInput={(params) => (
           <TextField
             {...params}
             label="Pokemon Name"
             color="secondary"
-            // sx={{ borderColor: "white" }}
             fullWidth
             variant="outlined"
           />
